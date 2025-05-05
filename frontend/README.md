@@ -24,6 +24,30 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 npm install
 ```
 
+### Frontend Tests
+
+The frontend tests use React Testing Library and Jest to test components and their functionality:
+
+```bash
+# Run frontend tests
+cd frontend
+npm test
+
+# Run with coverage report
+npm test -- --coverage
+```
+
+Current tests include:
+- **NoteList Component Tests**:
+  - Rendering of notes in a list
+  - Empty state when no notes are available
+  
+- **AuthContext Tests**:
+  - Authentication flow (login/logout)
+  - State management
+  - localStorage integration for token storage
+  - API mocking
+
 ## Available Scripts
 
 In the project directory, you can run:

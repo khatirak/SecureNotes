@@ -5,6 +5,7 @@ import { notesRouter } from "./notes";
 import { authMiddleware } from "./middleware";
 
 const app = express();
+export { app }; // Export the app object
 const PORT = process.env.PORT || 8000;
 
 // CORS configuration - just use this one approach
@@ -27,6 +28,8 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   res.status(500).json({ message: "Internal server error" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+}

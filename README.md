@@ -92,6 +92,23 @@ npm start
 npm test
 ```
 
+## Testing
+
+To run all tests: front and back end 
+```
+npm run
+```
+
+To run frontend test from root
+```
+npm run test:frontend
+```
+
+To run backend test from root
+```
+npm run test:backend
+```
+
 ## Trade-offs and Future Improvements
 
 - Currently using a hardcoded user for simplicity; would implement proper user registration and database storage such as mongodb

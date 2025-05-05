@@ -16,6 +16,8 @@
   - ts-node: ^10.9.2 - TypeScript execution environment
   - Various TypeScript type definitions (@types packages)
 
+- Make sure to replace the <code>JWT_SECRET</code> value
+
 ## Installation
 ```
 npm install
@@ -34,5 +36,25 @@ npm start
 - `npm start`: Runs the compiled application
 - `npm run dev`: Runs the application in development mode with ts-node
 
+### Backend Tests
+
+The backend uses Jest and Supertest for testing API endpoints and services:
+
+```bash
+# Run backend tests
+cd backend
+npm test
+
+# Run with watch mode
+npm run test:watch
+```
+
+Tests include:
+- Unit tests for authentication and note services
+- Integration tests for API endpoints
+- JWT token validation
+- Input validation
+
 ## Running the App
-The backend server will start on [http://localhost:8000](http://localhost:8000). This will run in the background and does not need to be opened in a browser.
+The backend server will start on [http://localhost:8000](http://localhost:8000). 
+<br>This will run in the background and does not need to be opened in a browser.
