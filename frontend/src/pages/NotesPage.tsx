@@ -29,9 +29,17 @@ const NotesPage: React.FC = () => {
       setLoading(true);
       const fetchedNotes = await getNotes();
       setNotes(fetchedNotes);
-      setError("");
-    } catch (err) {
-      setError("Failed to load notes");
+      setError(""); // Clear any previous errors
+    } catch (err: any) {
+      // Only set error if it's a real error, not just empty notes
+      if (err.response && err.response.status === 401) {
+        // Handle auth error
+        setError("Authentication error. Please try logging in again.");
+        logout();
+        navigate("/");
+      } else {
+        setError("Failed to load notes");
+      }
     } finally {
       setLoading(false);
     }

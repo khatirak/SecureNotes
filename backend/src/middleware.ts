@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-const JWT_SECRET = "your-secret-key"; // Same secret as in auth.ts
+dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET || "fallback-secret-key"; // Match the secret in auth.ts
 
 export interface AuthRequest extends Request {
   user?: { username: string };

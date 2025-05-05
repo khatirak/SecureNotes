@@ -1,7 +1,9 @@
 import axios from "axios";
 import { Note } from "./types";
 
-const API_URL = "http://localhost:3001";
+const API_URL = "http://localhost:8000";
+console.log(`API configured to connect to: ${API_URL}`);
+
 
 // Create axios instance
 const api = axios.create({

@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { addNote } from "../api";
+import { AuthContext } from "../context/AuthContext";
 
 interface NoteFormProps {
   onNoteAdded: () => void;
@@ -9,6 +11,8 @@ const NoteForm: React.FC<NoteFormProps> = ({ onNoteAdded }) => {
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,8 +32,17 @@ const NoteForm: React.FC<NoteFormProps> = ({ onNoteAdded }) => {
       setTimeout(() => {
         setSuccess("");
       }, 3000);
-    } catch (err) {
-      setError("Failed to add note");
+    } catch (err: any) {
+      if (err.response && err.response.status === 401) {
+        setError("Authentication error. Please log in again.");
+        // Redirect to login after 2 seconds
+        setTimeout(() => {
+          logout();
+          navigate("/");
+        }, 2000);
+      } else {
+        setError("Failed to add note");
+      }
     }
   };
 

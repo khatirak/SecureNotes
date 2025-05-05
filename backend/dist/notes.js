@@ -6,14 +6,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.notesRouter = void 0;
 const express_1 = __importDefault(require("express"));
 exports.notesRouter = express_1.default.Router();
-// In-memory store for notes
-let notes = [];
-// Get all notes
+// Map to store notes by username
+const userNotes = {};
+// Get all notes for the authenticated user
 exports.notesRouter.get("/", (req, res) => {
+    var _a;
+    const username = (_a = req.user) === null || _a === void 0 ? void 0 : _a.username;
+    if (!username) {
+        return res.status(401).json({ message: "User not authenticated" });
+    }
+    // Return empty array if user has no notes yet
+    const notes = userNotes[username] || [];
     res.json(notes);
 });
-// Add a new note
+// Add a new note for the authenticated user
 exports.notesRouter.post("/", (req, res) => {
+    var _a;
+    const username = (_a = req.user) === null || _a === void 0 ? void 0 : _a.username;
+    if (!username) {
+        return res.status(401).json({ message: "User not authenticated" });
+    }
     const { text } = req.body;
     // Validate input
     if (!text) {
@@ -24,6 +36,10 @@ exports.notesRouter.post("/", (req, res) => {
         text,
         timestamp: Date.now()
     };
-    notes.push(newNote);
+    // Initialize user's notes array if it doesn't exist
+    if (!userNotes[username]) {
+        userNotes[username] = [];
+    }
+    userNotes[username].push(newNote);
     res.status(201).json(newNote);
 });
