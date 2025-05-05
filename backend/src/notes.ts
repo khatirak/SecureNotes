@@ -3,7 +3,7 @@ import { AuthRequest } from "./middleware";
 
 export const notesRouter = express.Router();
 
-// Store notes by username
+// store notes by username
 interface Note {
   id: string;
   text: string;
