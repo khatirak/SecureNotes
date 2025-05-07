@@ -5,7 +5,7 @@ const API_URL = "http://localhost:8000";
 console.log(`API configured to connect to: ${API_URL}`);
 
 
-// Create axios instance
+// Create axios instance and add base URL
 const api = axios.create({
   baseURL: API_URL,
 });
